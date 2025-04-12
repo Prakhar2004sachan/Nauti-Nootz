@@ -27,7 +27,7 @@ function Card({ _id, title, type, datePosted, description, link }: cardProps) {
     const youtubeId = linkSplit?.pop();
     id = youtubeId;
   } else if (link?.includes("x.com") && link?.includes("?")) {
-    const tweetId = linkSplit?.pop()?.split("?")[0];
+    const tweetId = link.split("/").pop()?.split("?")[0];
     id = tweetId;
     tweetOwner = link?.split("/")[3];
   } else {
@@ -36,13 +36,16 @@ function Card({ _id, title, type, datePosted, description, link }: cardProps) {
     tweetOwner = link?.split("/")[3];
   }
 
+  //https '' x.com narendramodi status 1910951460134846720 t=hfaVyJbYWPnwyngfqegiLQ&s=19
+  // https://x.com/narendramodi/status/1910951460134846720?t=hfaVyJbYWPnwyngfqegiLQ&s=19
+
   // https://www.youtube.com/watch?v=HG10yrq1pbk&t=223s --pc
   // https://youtu.be/HG10yrq1pbk
 
   // https://x.com/BJP4India/status/1911017492333342786 --pc
   // https: '' x.com BJP4India status 1911017492333342786?s=19 --mobile
 
-  const deletePost = async () => {
+const deletePost = async () => {
     try {
       const token = localStorage.getItem("token");
       if (!token) return;

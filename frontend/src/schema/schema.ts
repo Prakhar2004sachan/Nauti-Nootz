@@ -30,7 +30,7 @@ export const PostSchema = z
   )
   .refine(
     (data) => {
-      if (data.type === "youtube") return data.link?.includes("youtube.com");
+      if (data.type === "youtube") return data.link?.includes("youtube.com") && data.link?.includes("youtu.be");
       if (data.type === "twitter") return data.link?.includes("x.com");
       return true;
     },
