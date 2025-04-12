@@ -7,11 +7,20 @@ import { GoPlus } from "react-icons/go";
 import { useAuth } from "../context/AuthContext";
 import Card from "../components/Card";
 import { useState } from "react";
+import { PuffLoader } from "react-spinners";
 
 function Documents() {
-  const { isAuthenticated, postedContent, gettingDate } = useAuth();
+  const { isAuthenticated, postedContent, gettingDate,loading } = useAuth();
   const [open, setOpen] = useState<boolean>(false);
   const [shareOpen, setShareOpen] = useState<boolean>(false);
+
+    if (loading) {
+      return (
+        <div className="flex items-center justify-center w-full h-screen">
+          <PuffLoader color="#5046e5" size={100} />
+        </div>
+      );
+    }
 
   return (
     <div

@@ -27,8 +27,10 @@ function Card({ _id, title, type, datePosted, description, link }: cardProps) {
     try {
       const url = new URL(link);
       if (url.hostname.includes("youtu.be")) {
+        // url pathname is '/HG10yrq1pbk'; slice = 'HG10yrq1pbk'
         videoId = url.pathname.slice(1);
       } else if (url.hostname.includes("youtube.com")) {
+        // https://www.youtube.com/watch?v=HG10yrq1pbk v=HG10yrq1pbk is search params
         videoId = url.searchParams.get("v") ?? "";
       }
     } catch (err) {

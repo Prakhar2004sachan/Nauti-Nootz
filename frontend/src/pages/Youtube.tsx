@@ -7,11 +7,20 @@ import CreateContent from "../components/CreateContent";
 import ShareModel from "../components/ShareModel";
 import NavBar from "../components/NavBar";
 import { useAuth } from "../context/AuthContext";
+import { PuffLoader } from "react-spinners";
 
 function Twitter() {
-  const { isAuthenticated, postedContent, gettingDate } = useAuth();
+  const { isAuthenticated, postedContent, gettingDate,loading } = useAuth();
   const [open, setOpen] = useState<boolean>(false);
   const [shareOpen, setShareOpen] = useState<boolean>(false);
+
+    if (loading) {
+      return (
+        <div className="flex items-center justify-center w-full h-screen">
+          <PuffLoader color="#5046e5" size={100} />
+        </div>
+      );
+    }
 
   return (
     <div
