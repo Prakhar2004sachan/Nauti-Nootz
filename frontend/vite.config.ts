@@ -6,7 +6,7 @@ export default defineConfig({
   plugins: [react()],
   server: {
     proxy: {
-      "/api": "http://localhost:5000",
+      "/api": "https://nauti-nootz-be.vercel.app",
     },
     host: "0.0.0.0",
     fs: {
