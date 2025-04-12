@@ -79,10 +79,10 @@ function ShareModel({ open, close }: { open: boolean; close: () => void }) {
   return (
     <div>
       {open && (
-        <div className="w-full h-screen bg-black opacity-95 top-0 left-0 fixed flex justify-center items-center">
+        <div className="w-full h-screen bg-black opacity-95 top-0 left-0 fixed flex justify-center items-center p-8">
           <div
             ref={model}
-            className="bg-white flex flex-col px-8 py-4 rounded-xl max-w-[15rem] sm:max-w-[20rem] lg:max-w-[30rem]"
+            className="bg-white flex flex-col px-8 py-4 rounded-xl max-w-[25rem] sm:max-w-[30rem]"
           >
             <div className="flex justify-between items-center w-full">
               <h3 className="font-semibold text-2xl">

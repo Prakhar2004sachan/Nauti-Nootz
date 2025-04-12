@@ -41,7 +41,7 @@ function Twitter() {
             <h1 className="text-xl lg:text-3xl px-2 font-semibold">
               All Notes
             </h1>
-            <div className="flex gap-5">
+            <div className="flex gap-5 text-xs lg:text-md items-center justify-center">
               <Button
                 title="Share Nootz "
                 startIcon={<IoShareSocialOutline className="size-6" />}

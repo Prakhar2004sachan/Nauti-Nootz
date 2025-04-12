@@ -1,88 +1,88 @@
-import NavBar from '../components/NavBar';
-import CreateContent from '../components/CreateContent';
-import ShareModel from '../components/ShareModel';
-import Button from '../components/Button';
-import { IoShareSocialOutline } from 'react-icons/io5';
-import { GoPlus } from 'react-icons/go';
-import { useAuth } from '../context/AuthContext';
-import Card from '../components/Card';
-import { useState } from 'react';
+import NavBar from "../components/NavBar";
+import CreateContent from "../components/CreateContent";
+import ShareModel from "../components/ShareModel";
+import Button from "../components/Button";
+import { IoShareSocialOutline } from "react-icons/io5";
+import { GoPlus } from "react-icons/go";
+import { useAuth } from "../context/AuthContext";
+import Card from "../components/Card";
+import { useState } from "react";
 
 function Documents() {
-   const { isAuthenticated, postedContent, gettingDate } = useAuth();
-   const [open, setOpen] = useState<boolean>(false);
-   const [shareOpen, setShareOpen] = useState<boolean>(false);
+  const { isAuthenticated, postedContent, gettingDate } = useAuth();
+  const [open, setOpen] = useState<boolean>(false);
+  const [shareOpen, setShareOpen] = useState<boolean>(false);
 
-   return (
-     <div
-       className={`bg-gray-100 w-full ${
-         open || shareOpen ? "overflow-hidden h-screen" : ""
-       } h-screen`}
-     >
-       <div className="flex flex-col lg:flex-row h-full w-full">
-         <div className="w-full lg:hidden">
-           <NavBar />
-         </div>
-         <CreateContent
-           open={open}
-           close={() => {
-             setOpen(false);
-           }}
-         />
-         <ShareModel
-           open={shareOpen}
-           close={() => {
-             setShareOpen(false);
-           }}
-         />
+  return (
+    <div
+      className={`bg-gray-100 w-full ${
+        open || shareOpen ? "overflow-hidden h-screen" : ""
+      } h-screen`}
+    >
+      <div className="flex flex-col lg:flex-row h-full w-full">
+        <div className="w-full lg:hidden">
+          <NavBar />
+        </div>
+        <CreateContent
+          open={open}
+          close={() => {
+            setOpen(false);
+          }}
+        />
+        <ShareModel
+          open={shareOpen}
+          close={() => {
+            setShareOpen(false);
+          }}
+        />
 
-         <div className="flex-1 flex flex-col p-3 sm:p-6 overflow-y-auto">
-           <div className="flex gap-5 mb-8 items-center justify-between">
-             <h1 className="text-xl lg:text-3xl px-2 font-semibold">
-               All Notes
-             </h1>
-             <div className="flex gap-5">
-               <Button
-                 title="Share Nootz "
-                 startIcon={<IoShareSocialOutline className="size-6" />}
-                 variant="secondary"
-                 onClick={() => {
-                   setShareOpen(true);
-                 }}
-               />
-               <Button
-                 title="Add Content"
-                 startIcon={<GoPlus className="size-6" />}
-                 variant="primary"
-                 onClick={() => {
-                   setOpen(true);
-                 }}
-               />
-             </div>
-           </div>
-           {isAuthenticated && (
-             <div className="columns-[20rem] w-full p-4 sm:p-0">
-               {postedContent
-                 .filter((item) => item.type === "document")
-                 .map((item, index) => (
-                   <Card
-                     datePosted={gettingDate(item.date)}
-                     description={item.description}
-                     key={index}
-                     type={item.type as "document"}
-                     title={item.title}
-                     _id={item._id}
-                   />
-                 ))}
-             </div>
-           )}
-           {!isAuthenticated && (
-             <div className="">You Are Not login Please login.</div>
-           )}
-         </div>
-       </div>
-     </div>
-   );
+        <div className="flex-1 flex flex-col p-3 sm:p-6 overflow-y-auto">
+          <div className="flex gap-5 mb-8 items-center justify-between">
+            <h1 className="text-xl lg:text-3xl px-2 font-semibold">
+              All Notes
+            </h1>
+            <div className="flex gap-5 text-xs lg:text-md items-center justify-center">
+              <Button
+                title="Share Nootz "
+                startIcon={<IoShareSocialOutline className="size-6" />}
+                variant="secondary"
+                onClick={() => {
+                  setShareOpen(true);
+                }}
+              />
+              <Button
+                title="Add Content"
+                startIcon={<GoPlus className="size-6" />}
+                variant="primary"
+                onClick={() => {
+                  setOpen(true);
+                }}
+              />
+            </div>
+          </div>
+          {isAuthenticated && (
+            <div className="columns-[20rem] w-full p-4 sm:p-0">
+              {postedContent
+                .filter((item) => item.type === "document")
+                .map((item, index) => (
+                  <Card
+                    datePosted={gettingDate(item.date)}
+                    description={item.description}
+                    key={index}
+                    type={item.type as "document"}
+                    title={item.title}
+                    _id={item._id}
+                  />
+                ))}
+            </div>
+          )}
+          {!isAuthenticated && (
+            <div className="">You Are Not login Please login.</div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
 }
 
-export default Documents
+export default Documents;

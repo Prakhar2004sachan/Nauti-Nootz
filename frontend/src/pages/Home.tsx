@@ -37,11 +37,11 @@ function Home() {
         />
 
         <div className="flex-1 flex flex-col p-3 sm:p-6 overflow-y-auto">
-          <div className="flex gap-5 mb-8 items-center justify-between">
+          <div className="flex gap-5 px-4 mb-4 items-center justify-between">
             <h1 className="text-xl lg:text-3xl px-2 font-semibold">
               All Notes
             </h1>
-            <div className="flex gap-5">
+            <div className="flex gap-5 text-xs lg:text-md items-center justify-center">
               <Button
                 title="Share Nootz"
                 startIcon={<IoShareSocialOutline className="size-6" />}
@@ -61,7 +61,7 @@ function Home() {
             </div>
           </div>
           {isAuthenticated && (
-            <div className="columns-[20rem] p-4 sm:p-0">
+            <div className="columns-[20rem] px-4 sm:p-0">
               {postedContent.map((item, index) => (
                 <Card
                   key={index}
