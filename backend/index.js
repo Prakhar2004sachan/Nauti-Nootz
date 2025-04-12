@@ -2,9 +2,9 @@ require("dotenv").config();
 const express = require("express");
 const serverless = require("serverless-http");
 const cors = require("cors");
-const { connectDB } = require("../config/db.js");
-const authRoute = require("../routes/authRoute.js");
-const postContent = require("../routes/user-routes.js");
+const { connectDB } = require("./config/db.js");
+const authRoute = require("./routes/authRoute.js");
+const postContent = require("./routes/user-routes.js");
 
 // dotenv.config();
 connectDB();
@@ -20,5 +20,7 @@ app.get("/api/hello", (req, res) => {
   res.json({ msg: "Hello from serverless!" });
 });
 
-module.exports = app;
-module.exports.handler = serverless(app); 
+const port = 3000;
+app.listen(port, ()=>{
+  console.log(`server is running on ${port} port`)
+})
