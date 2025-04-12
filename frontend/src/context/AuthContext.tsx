@@ -54,11 +54,14 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         const token = localStorage.getItem("token");
         if (!token) return;
 
-        const res = await axios.get("http://localhost:3000/api/posts", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        const res = await axios.get(
+          `${import.meta.env.VITE_BACKENDURL}/api/posts`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
         setPostedContent(res.data.content);
         console.log(res.data.content);
       } catch (error: any) {
@@ -78,11 +81,14 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   const verifyToken = async (token: string) => {
     try {
-      const res = await axios.get("http://localhost:3000/auth/verify", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const res = await axios.get(
+        `${import.meta.env.VITE_BACKENDURL}/auth/verify`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       console.log("✅ Token verified with backend:", res.data);
       return res.data.user;
     } catch (err) {

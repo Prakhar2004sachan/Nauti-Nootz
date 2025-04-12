@@ -36,7 +36,7 @@ function InputComponent() {
       }
 
       const response = await axios.post(
-        "http://localhost:3000/api/add-content",
+        `${import.meta.env.VITE_BACKENDURL}/api/add-content`,
         { ...data, date },
         {
           headers: {

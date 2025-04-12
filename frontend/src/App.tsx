@@ -10,8 +10,7 @@ import Sidebar from "./components/Sidebar";
 import Documents from "./pages/Documents";
 import Youtube from "./pages/Youtube";
 import Twitter from "./pages/Twitter";
-import Tags from "./pages/Tags";
-import Links from "./pages/Links";
+
 
 function App() {
   const { isAuthenticated, loading } = useAuth();

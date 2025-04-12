@@ -98,7 +98,7 @@ function ShareModel({ open, close }: { open: boolean; close: () => void }) {
               <button
                 onClick={() => {
                   navigator.clipboard.writeText(
-                    `http://localhost:5173/brain/share/${url}`
+                    `${import.meta.env.VITE_FRONTENDURL}/brain/share/${url}`
                   );
                   alert("Link copied to clipboard");
                 }}

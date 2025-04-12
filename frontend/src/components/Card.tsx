@@ -35,7 +35,7 @@ function Card({ _id, title, type, datePosted, description, link }: cardProps) {
       if (!token) return;
 
       const res = await axios.post(
-        "http://localhost:3000/api/delete-content",
+        `${import.meta.env.VITE_BACKENDURL}/api/delete-content`,
         {
           contentId: _id,
         },
