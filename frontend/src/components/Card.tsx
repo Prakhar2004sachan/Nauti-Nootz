@@ -17,49 +17,46 @@ interface cardProps {
 function Card({ _id, title, type, datePosted, description, link }: cardProps) {
   useTwitterEmbed(type);
   const { setRefreshTrigger } = useAuth();
-  const linkSplit = link?.split("/");
-  let id = null;
-  let tweetOwner = null;
-  if (link?.includes("=")) {
-    const youtubeId = linkSplit?.pop()?.split("=")[1];
-    id = youtubeId;
-  } else if (link?.includes("youtu.be")) {
-    const youtubeId = linkSplit?.pop();
-    id = youtubeId;
-  } else if (link?.includes("x.com") && link?.includes("?")) {
-    const tweetId = link.split("/").pop()?.split("?")[0];
-    id = tweetId;
-    tweetOwner = link?.split("/")[3];
-  } else {
-    const tweetId = linkSplit?.pop();
-    id = tweetId;
-    tweetOwner = link?.split("/")[3];
+
+  let videoId = "";
+  let tweetId = "";
+  let tweetOwner = "";
+
+  // Parse YouTube links
+  if (type === "youtube" && link) {
+    try {
+      const url = new URL(link);
+      if (url.hostname.includes("youtu.be")) {
+        videoId = url.pathname.slice(1);
+      } else if (url.hostname.includes("youtube.com")) {
+        videoId = url.searchParams.get("v") ?? "";
+      }
+    } catch (err) {
+      console.warn("Invalid YouTube link format",err);
+    }
   }
 
-  //https '' x.com narendramodi status 1910951460134846720 t=hfaVyJbYWPnwyngfqegiLQ&s=19
-  // https://x.com/narendramodi/status/1910951460134846720?t=hfaVyJbYWPnwyngfqegiLQ&s=19
+  // Parse Twitter/X links
+  if (type === "twitter" && link) {
+    try {
+      const url = new URL(link.replace("x.com", "twitter.com")); // normalize domain
+      const pathParts = url.pathname.split("/");
+      tweetOwner = pathParts[1];
+      tweetId = pathParts[3]?.split("?")[0] ?? "";
+    } catch (err) {
+      console.warn("Invalid Twitter/X link format",err);
+    }
+  }
 
-  // https://www.youtube.com/watch?v=HG10yrq1pbk&t=223s --pc
-  // https://youtu.be/HG10yrq1pbk
-
-  // https://x.com/BJP4India/status/1911017492333342786 --pc
-  // https: '' x.com BJP4India status 1911017492333342786?s=19 --mobile
-
-const deletePost = async () => {
+  const deletePost = async () => {
     try {
       const token = localStorage.getItem("token");
       if (!token) return;
 
       const res = await axios.post(
         `${import.meta.env.VITE_BACKENDURL}/api/delete-content`,
-        {
-          contentId: _id,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
+        { contentId: _id },
+        { headers: { Authorization: `Bearer ${token}` } }
       );
       setRefreshTrigger((prev: boolean) => !prev);
       console.log(res);
@@ -83,33 +80,36 @@ const deletePost = async () => {
           onClick={deletePost}
         />
       </div>
-      {/* content */}
+
+      {/* Content */}
       <div className="mt-5">
-        {type === "youtube" && (
+        {type === "youtube" && videoId && (
           <iframe
-            // width="560"
             height="250"
             className="w-full rounded-xl"
-            src={`https://www.youtube.com/embed/${id}`}
+            src={`https://www.youtube.com/embed/${videoId}`}
             title={title}
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             referrerPolicy="strict-origin-when-cross-origin"
           ></iframe>
         )}
-        {type === "twitter" && (
+
+        {type === "twitter" && tweetId && tweetOwner && (
           <div className="mt-3">
             <blockquote className="twitter-tweet">
               <a
-                href={`https://twitter.com/${tweetOwner}/status/${id}?ref_src=twsrc%5Etfw`}
+                href={`https://twitter.com/${tweetOwner}/status/${tweetId}?ref_src=twsrc%5Etfw`}
                 data-conversation="none"
               >
-                April 7, 2025
+                View Tweet
               </a>
             </blockquote>
           </div>
         )}
+
         {type === "document" && <div className="mt-3">{description}</div>}
       </div>
+
       <div className="mt-3">
         <p className="text-zinc-500">Added on {datePosted}</p>
       </div>
