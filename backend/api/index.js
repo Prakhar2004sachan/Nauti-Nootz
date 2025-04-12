@@ -1,10 +1,11 @@
 require("dotenv").config();
 const express = require("express");
+const serverless = require("serverless-http");
 const dotenv = require("dotenv");
 const cors = require("cors");
-const { connectDB } = require("./config/db.js");
-const authRoute = require("./routes/authRoute");
-const postContent = require("./routes/user-routes");
+const { connectDB } = require("../config/db.js");
+const authRoute = require("../routes/authRoute.js");
+const postContent = require("../routes/user-routes.js");
 
 // dotenv.config();
 connectDB();
