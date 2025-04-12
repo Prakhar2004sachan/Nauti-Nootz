@@ -8,10 +8,16 @@ export default defineConfig({
       "/api": {
         target: "https://nauti-nootz-be.vercel.app",
         changeOrigin: true,
-        secure: false,
+        secure: true, // should be true for https in prod
+      },
+      "/auth": {
+        target: "https://nauti-nootz-be.vercel.app",
+        changeOrigin: true,
+        secure: true,
       },
     },
-    host: "0.0.0.0",
+    host: "localhost",
+    port: 5173,
     fs: {
       strict: false,
     },
