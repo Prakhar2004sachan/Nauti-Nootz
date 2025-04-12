@@ -14,7 +14,7 @@ function SharedBrain() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get(`http://localhost:3000/api/share/${id}`);
+        const res = await axios.get(`${import.meta.env.VITE_BACKENDURL}/api/share/${id}`);
         setData(res.data);
         console.log(res);
       } catch (err) {
