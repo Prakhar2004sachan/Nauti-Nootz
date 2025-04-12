@@ -1,4 +1,3 @@
-import React, { useState } from 'react'
 import NavBar from '../components/NavBar';
 import CreateContent from '../components/CreateContent';
 import ShareModel from '../components/ShareModel';
@@ -7,6 +6,7 @@ import { IoShareSocialOutline } from 'react-icons/io5';
 import { GoPlus } from 'react-icons/go';
 import { useAuth } from '../context/AuthContext';
 import Card from '../components/Card';
+import { useState } from 'react';
 
 function Documents() {
    const { isAuthenticated, postedContent, gettingDate } = useAuth();

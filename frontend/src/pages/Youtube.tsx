@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import  { useState } from "react";
 import Card from "../components/Card";
 import Button from "../components/Button";
 import { IoShareSocialOutline } from "react-icons/io5";
