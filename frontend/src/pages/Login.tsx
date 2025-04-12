@@ -2,7 +2,8 @@ import { useGoogleLogin } from "@react-oauth/google";
 import { FcGoogle } from "react-icons/fc";
 import { googleAuth } from "../api";
 import { useAuth } from "../context/AuthContext";
-// import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
+
 
 type GoogleAuthCodeResponse = {
   code: string;
@@ -10,7 +11,7 @@ type GoogleAuthCodeResponse = {
 
 function Login() {
   const { login } = useAuth();
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const responseGoogle = async (authResult: GoogleAuthCodeResponse) => {
     console.log("📦 Google login response:", authResult);
@@ -21,7 +22,7 @@ function Login() {
         const token = result.data.token;
         console.log(token);
         await login(token);
-        // navigate("/");
+        navigate("/");
       } else {
         throw new Error("No authorization code received from Google.");
       }
