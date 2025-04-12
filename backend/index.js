@@ -16,8 +16,9 @@ app.use(express.json());
 
 app.use("/auth", authRoute);
 app.use("/api", postContent);
-
-const port = 3000;
-app.listen(port, () => {
-  console.log("server is running");
+app.get("/api/hello", (req, res) => {
+  res.json({ msg: "Hello from serverless!" });
 });
+
+module.exports = app;
+module.exports.handler = serverless(app); 
