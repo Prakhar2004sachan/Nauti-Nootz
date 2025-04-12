@@ -6,6 +6,7 @@ import Button from "./Button";
 import Login from "../pages/Login";
 import { useAuth } from "../context/AuthContext";
 import { AiOutlineHome } from "react-icons/ai";
+import { Link } from "react-router-dom";
 
 function Sidebar() {
   const { isAuthenticated, user, logout } = useAuth();
@@ -46,18 +47,19 @@ function Sidebar() {
           <>
             <div className="flex flex-col gap-3 items-center justify-center">
               <div className="border-2 border-purple-600 rounded-full p-2">
-              <img
-                src={user?.image}
-                alt="user-image"
-                className="rounded-full"
-              /></div>
+                <img
+                  src={user?.image}
+                  alt="user-image"
+                  className="rounded-full"
+                />
+              </div>
               <p>{`Welcome, ${user?.name}`}</p>
             </div>
             <Button variant="primary" title="logout" onClick={logout} />
           </>
         )}
-
-        <Button variant="secondary" title="See github code" />
+        <Link to={"https://github.com/Prakhar2004sachan/Nauti-Nootz"} className="bg-purple-200 rounded-xl px-4 py-2 text-center text-purple-600" target="blank">
+        See github code</Link>
       </div>
     </div>
   );
