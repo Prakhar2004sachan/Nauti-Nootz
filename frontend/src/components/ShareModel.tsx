@@ -19,7 +19,7 @@ function ShareModel({ open, close }: { open: boolean; close: () => void }) {
 
       try {
         const res = await axios.get(
-          "http://localhost:3000/api/shared", // backend will return existing hash if found
+          `${import.meta.env.VITE_BACKENDURL}/api/shared`, // backend will return existing hash if found
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -51,7 +51,7 @@ function ShareModel({ open, close }: { open: boolean; close: () => void }) {
         return;
       }
       const res = await axios.post(
-        "http://localhost:3000/api/share",
+        `${import.meta.env.VITE_BACKENDURL}/api/share`,
         {
           share: !link,
         },
