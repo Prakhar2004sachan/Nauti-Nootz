@@ -75,6 +75,7 @@ function Twitter() {
                 .filter((item) => item.type === "youtube")
                 .map((item, index) => (
                   <Card
+                    show={true}
                     datePosted={gettingDate(item.date)}
                     link={item.link}
                     key={index}

@@ -5,6 +5,7 @@ import axios from "axios";
 import { useAuth } from "../context/AuthContext";
 import { PuffLoader } from "react-spinners";
 
+
 function SharedBrain() {
   const { gettingDate } = useAuth();
   const { id } = useParams();
@@ -84,6 +85,7 @@ function SharedBrain() {
                   title={item.title}
                   key={index}
                   _id={item._id}
+                  show={false}
                 />
               ))
             ) : (

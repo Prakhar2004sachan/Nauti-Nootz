@@ -112,7 +112,7 @@ function ShareModel({ open, close }: { open: boolean; close: () => void }) {
               <Button
                 variant="primary"
                 startIcon={<MdContentCopy className="size-6" />}
-                title="Share Brain"
+                title="Share Nootz"
                 onClick={shareLinkHandler}
               />
             ) : (

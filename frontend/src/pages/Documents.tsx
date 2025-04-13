@@ -75,6 +75,7 @@ function Documents() {
                 .filter((item) => item.type === "document")
                 .map((item, index) => (
                   <Card
+                    show={true}
                     datePosted={gettingDate(item.date)}
                     description={item.description}
                     key={index}

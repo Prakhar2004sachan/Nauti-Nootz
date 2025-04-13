@@ -73,6 +73,7 @@ function Home() {
             <div className="columns-[20rem] px-4 sm:p-0">
               {postedContent.map((item, index) => (
                 <Card
+                  show={true}
                   key={index}
                   datePosted={gettingDate(item.date)}
                   type={item.type as "youtube" | "twitter" | "document"}

@@ -75,6 +75,7 @@ function Twitter() {
                 .filter((item) => item.type === "twitter")
                 .map((item, index) => (
                   <Card
+                    show={true}
                     key={index}
                     datePosted={gettingDate(item.date)}
                     type={item.type as "twitter"}

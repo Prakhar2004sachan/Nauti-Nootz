@@ -12,9 +12,18 @@ interface cardProps {
   datePosted: string;
   link?: string;
   description?: string;
+  show: boolean;
 }
 
-function Card({ _id, title, type, datePosted, description, link }: cardProps) {
+function Card({
+  _id,
+  title,
+  type,
+  datePosted,
+  description,
+  link,
+  show,
+}: cardProps) {
   useTwitterEmbed(type);
   const { setRefreshTrigger } = useAuth();
 
@@ -34,7 +43,7 @@ function Card({ _id, title, type, datePosted, description, link }: cardProps) {
         videoId = url.searchParams.get("v") ?? "";
       }
     } catch (err) {
-      console.warn("Invalid YouTube link format",err);
+      console.warn("Invalid YouTube link format", err);
     }
   }
 
@@ -46,7 +55,7 @@ function Card({ _id, title, type, datePosted, description, link }: cardProps) {
       tweetOwner = pathParts[1];
       tweetId = pathParts[3]?.split("?")[0] ?? "";
     } catch (err) {
-      console.warn("Invalid Twitter/X link format",err);
+      console.warn("Invalid Twitter/X link format", err);
     }
   }
 
@@ -77,10 +86,12 @@ function Card({ _id, title, type, datePosted, description, link }: cardProps) {
           {type === "document" && <GoBook className="size-5" />}
           <h4 className="font-semibold text-md">{title}</h4>
         </div>
-        <AiOutlineDelete
-          className="size-5 cursor-pointer text-zinc-400"
-          onClick={deletePost}
-        />
+        {show && (
+          <AiOutlineDelete
+            className="size-5 cursor-pointer text-zinc-400"
+            onClick={deletePost}
+          />
+        )}
       </div>
 
       {/* Content */}
