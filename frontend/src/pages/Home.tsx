@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Card from "../components/Card";
 import { GoPlus } from "react-icons/go";
 import Button from "../components/Button";
@@ -10,9 +10,20 @@ import { useAuth } from "../context/AuthContext";
 import { PuffLoader } from "react-spinners";
 
 function Home() {
-  const { isAuthenticated, postedContent,gettingDate,loading } = useAuth();
+  const {
+    isAuthenticated,
+    postedContent,
+    gettingDate,
+    loading,
+    setRefreshTrigger,
+  } = useAuth();
   const [open, setOpen] = useState<boolean>(false);
   const [shareOpen, setShareOpen] = useState<boolean>(false);
+
+  useEffect(() => {
+    setRefreshTrigger(true);
+    console.log(postedContent);
+  }, [postedContent]);
 
   if (loading) {
     return (
